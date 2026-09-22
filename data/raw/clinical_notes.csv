@@ -1,0 +1,501 @@
+stay_id,subject_id,text_note
+30000000,1000,Post-operative recovery progressing well. No acute distress reported.
+30000001,1001,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000002,1002,Post-operative recovery progressing well. No acute distress reported.
+30000003,1003,Post-operative recovery progressing well. No acute distress reported.
+30000004,1004,"Afebrile, hemodynamically stable without vasopressor support."
+30000005,1005,"Afebrile, hemodynamically stable without vasopressor support."
+30000006,1006,"Patient resting comfortably, vital signs within normal parameters."
+30000007,1007,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000008,1008,Post-operative recovery progressing well. No acute distress reported.
+30000009,1009,"Afebrile, hemodynamically stable without vasopressor support."
+30000010,1010,"Afebrile, hemodynamically stable without vasopressor support."
+30000011,1011,Fever spike observed with elevated white blood cell count and tachypnea.
+30000012,1012,Post-operative recovery progressing well. No acute distress reported.
+30000013,1013,"Afebrile, hemodynamically stable without vasopressor support."
+30000014,1014,Post-operative recovery progressing well. No acute distress reported.
+30000015,1015,"Afebrile, hemodynamically stable without vasopressor support."
+30000016,1016,Post-operative recovery progressing well. No acute distress reported.
+30000017,1017,"Patient resting comfortably, vital signs within normal parameters."
+30000018,1018,"Afebrile, hemodynamically stable without vasopressor support."
+30000019,1019,"Patient resting comfortably, vital signs within normal parameters."
+30000020,1020,"Afebrile, hemodynamically stable without vasopressor support."
+30000021,1021,"Afebrile, hemodynamically stable without vasopressor support."
+30000022,1022,Post-operative recovery progressing well. No acute distress reported.
+30000023,1023,"Patient resting comfortably, vital signs within normal parameters."
+30000024,1024,Post-operative recovery progressing well. No acute distress reported.
+30000025,1025,Post-operative recovery progressing well. No acute distress reported.
+30000026,1026,Post-operative recovery progressing well. No acute distress reported.
+30000027,1027,Post-operative recovery progressing well. No acute distress reported.
+30000028,1028,"Afebrile, hemodynamically stable without vasopressor support."
+30000029,1029,Post-operative recovery progressing well. No acute distress reported.
+30000030,1030,"Afebrile, hemodynamically stable without vasopressor support."
+30000031,1031,"Afebrile, hemodynamically stable without vasopressor support."
+30000032,1032,Post-operative recovery progressing well. No acute distress reported.
+30000033,1033,Fever spike observed with elevated white blood cell count and tachypnea.
+30000034,1034,"Patient exhibits altered mental status, skin is warm and flushed."
+30000035,1035,"Patient resting comfortably, vital signs within normal parameters."
+30000036,1036,"Patient resting comfortably, vital signs within normal parameters."
+30000037,1037,"Patient resting comfortably, vital signs within normal parameters."
+30000038,1038,"Afebrile, hemodynamically stable without vasopressor support."
+30000039,1039,"Afebrile, hemodynamically stable without vasopressor support."
+30000040,1040,"Patient resting comfortably, vital signs within normal parameters."
+30000041,1041,"Patient resting comfortably, vital signs within normal parameters."
+30000042,1042,"Patient resting comfortably, vital signs within normal parameters."
+30000043,1043,"Patient exhibits altered mental status, skin is warm and flushed."
+30000044,1044,"Afebrile, hemodynamically stable without vasopressor support."
+30000045,1045,"Patient resting comfortably, vital signs within normal parameters."
+30000046,1046,"Patient resting comfortably, vital signs within normal parameters."
+30000047,1047,Post-operative recovery progressing well. No acute distress reported.
+30000048,1048,Post-operative recovery progressing well. No acute distress reported.
+30000049,1049,"Afebrile, hemodynamically stable without vasopressor support."
+30000050,1050,"Patient exhibits altered mental status, skin is warm and flushed."
+30000051,1051,"Patient resting comfortably, vital signs within normal parameters."
+30000052,1052,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000053,1053,"Patient exhibits altered mental status, skin is warm and flushed."
+30000054,1054,"Patient resting comfortably, vital signs within normal parameters."
+30000055,1055,"Patient exhibits altered mental status, skin is warm and flushed."
+30000056,1056,Post-operative recovery progressing well. No acute distress reported.
+30000057,1057,Post-operative recovery progressing well. No acute distress reported.
+30000058,1058,"Patient resting comfortably, vital signs within normal parameters."
+30000059,1059,"Patient resting comfortably, vital signs within normal parameters."
+30000060,1060,"Patient resting comfortably, vital signs within normal parameters."
+30000061,1061,"Patient resting comfortably, vital signs within normal parameters."
+30000062,1062,"Afebrile, hemodynamically stable without vasopressor support."
+30000063,1063,Post-operative recovery progressing well. No acute distress reported.
+30000064,1064,"Afebrile, hemodynamically stable without vasopressor support."
+30000065,1065,"Afebrile, hemodynamically stable without vasopressor support."
+30000066,1066,"Afebrile, hemodynamically stable without vasopressor support."
+30000067,1067,"Afebrile, hemodynamically stable without vasopressor support."
+30000068,1068,"Patient resting comfortably, vital signs within normal parameters."
+30000069,1069,"Patient exhibits altered mental status, skin is warm and flushed."
+30000070,1070,"Patient resting comfortably, vital signs within normal parameters."
+30000071,1071,"Patient resting comfortably, vital signs within normal parameters."
+30000072,1072,Post-operative recovery progressing well. No acute distress reported.
+30000073,1073,Post-operative recovery progressing well. No acute distress reported.
+30000074,1074,"Patient resting comfortably, vital signs within normal parameters."
+30000075,1075,"Patient resting comfortably, vital signs within normal parameters."
+30000076,1076,"Patient resting comfortably, vital signs within normal parameters."
+30000077,1077,"Patient resting comfortably, vital signs within normal parameters."
+30000078,1078,"Patient resting comfortably, vital signs within normal parameters."
+30000079,1079,Post-operative recovery progressing well. No acute distress reported.
+30000080,1080,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000081,1081,"Patient resting comfortably, vital signs within normal parameters."
+30000082,1082,Post-operative recovery progressing well. No acute distress reported.
+30000083,1083,Post-operative recovery progressing well. No acute distress reported.
+30000084,1084,"Afebrile, hemodynamically stable without vasopressor support."
+30000085,1085,"Patient resting comfortably, vital signs within normal parameters."
+30000086,1086,"Patient resting comfortably, vital signs within normal parameters."
+30000087,1087,Post-operative recovery progressing well. No acute distress reported.
+30000088,1088,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000089,1089,Post-operative recovery progressing well. No acute distress reported.
+30000090,1090,Post-operative recovery progressing well. No acute distress reported.
+30000091,1091,"Patient resting comfortably, vital signs within normal parameters."
+30000092,1092,Post-operative recovery progressing well. No acute distress reported.
+30000093,1093,Post-operative recovery progressing well. No acute distress reported.
+30000094,1094,"Patient resting comfortably, vital signs within normal parameters."
+30000095,1095,Post-operative recovery progressing well. No acute distress reported.
+30000096,1096,"Afebrile, hemodynamically stable without vasopressor support."
+30000097,1097,"Patient resting comfortably, vital signs within normal parameters."
+30000098,1098,Post-operative recovery progressing well. No acute distress reported.
+30000099,1099,Post-operative recovery progressing well. No acute distress reported.
+30000100,1100,"Patient resting comfortably, vital signs within normal parameters."
+30000101,1101,Post-operative recovery progressing well. No acute distress reported.
+30000102,1102,"Afebrile, hemodynamically stable without vasopressor support."
+30000103,1103,"Afebrile, hemodynamically stable without vasopressor support."
+30000104,1104,"Patient exhibits altered mental status, skin is warm and flushed."
+30000105,1105,"Afebrile, hemodynamically stable without vasopressor support."
+30000106,1106,"Patient resting comfortably, vital signs within normal parameters."
+30000107,1107,"Afebrile, hemodynamically stable without vasopressor support."
+30000108,1108,"Patient resting comfortably, vital signs within normal parameters."
+30000109,1109,Post-operative recovery progressing well. No acute distress reported.
+30000110,1110,Post-operative recovery progressing well. No acute distress reported.
+30000111,1111,"Patient resting comfortably, vital signs within normal parameters."
+30000112,1112,Fever spike observed with elevated white blood cell count and tachypnea.
+30000113,1113,"Patient resting comfortably, vital signs within normal parameters."
+30000114,1114,Post-operative recovery progressing well. No acute distress reported.
+30000115,1115,"Patient exhibits altered mental status, skin is warm and flushed."
+30000116,1116,Post-operative recovery progressing well. No acute distress reported.
+30000117,1117,"Patient resting comfortably, vital signs within normal parameters."
+30000118,1118,"Patient exhibits altered mental status, skin is warm and flushed."
+30000119,1119,"Afebrile, hemodynamically stable without vasopressor support."
+30000120,1120,Post-operative recovery progressing well. No acute distress reported.
+30000121,1121,"Patient exhibits altered mental status, skin is warm and flushed."
+30000122,1122,"Patient resting comfortably, vital signs within normal parameters."
+30000123,1123,"Afebrile, hemodynamically stable without vasopressor support."
+30000124,1124,"Patient resting comfortably, vital signs within normal parameters."
+30000125,1125,"Patient resting comfortably, vital signs within normal parameters."
+30000126,1126,"Patient resting comfortably, vital signs within normal parameters."
+30000127,1127,Fever spike observed with elevated white blood cell count and tachypnea.
+30000128,1128,"Afebrile, hemodynamically stable without vasopressor support."
+30000129,1129,"Afebrile, hemodynamically stable without vasopressor support."
+30000130,1130,"Patient resting comfortably, vital signs within normal parameters."
+30000131,1131,"Patient resting comfortably, vital signs within normal parameters."
+30000132,1132,"Patient resting comfortably, vital signs within normal parameters."
+30000133,1133,"Afebrile, hemodynamically stable without vasopressor support."
+30000134,1134,"Patient exhibits altered mental status, skin is warm and flushed."
+30000135,1135,"Patient resting comfortably, vital signs within normal parameters."
+30000136,1136,"Patient resting comfortably, vital signs within normal parameters."
+30000137,1137,"Patient resting comfortably, vital signs within normal parameters."
+30000138,1138,Post-operative recovery progressing well. No acute distress reported.
+30000139,1139,Fever spike observed with elevated white blood cell count and tachypnea.
+30000140,1140,"Patient exhibits altered mental status, skin is warm and flushed."
+30000141,1141,"Patient resting comfortably, vital signs within normal parameters."
+30000142,1142,"Afebrile, hemodynamically stable without vasopressor support."
+30000143,1143,"Patient resting comfortably, vital signs within normal parameters."
+30000144,1144,"Patient resting comfortably, vital signs within normal parameters."
+30000145,1145,"Patient resting comfortably, vital signs within normal parameters."
+30000146,1146,Post-operative recovery progressing well. No acute distress reported.
+30000147,1147,Post-operative recovery progressing well. No acute distress reported.
+30000148,1148,"Afebrile, hemodynamically stable without vasopressor support."
+30000149,1149,"Afebrile, hemodynamically stable without vasopressor support."
+30000150,1150,"Patient exhibits altered mental status, skin is warm and flushed."
+30000151,1151,"Patient resting comfortably, vital signs within normal parameters."
+30000152,1152,"Patient resting comfortably, vital signs within normal parameters."
+30000153,1153,"Patient resting comfortably, vital signs within normal parameters."
+30000154,1154,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000155,1155,"Patient resting comfortably, vital signs within normal parameters."
+30000156,1156,"Afebrile, hemodynamically stable without vasopressor support."
+30000157,1157,"Afebrile, hemodynamically stable without vasopressor support."
+30000158,1158,Post-operative recovery progressing well. No acute distress reported.
+30000159,1159,"Afebrile, hemodynamically stable without vasopressor support."
+30000160,1160,"Afebrile, hemodynamically stable without vasopressor support."
+30000161,1161,"Afebrile, hemodynamically stable without vasopressor support."
+30000162,1162,Post-operative recovery progressing well. No acute distress reported.
+30000163,1163,Post-operative recovery progressing well. No acute distress reported.
+30000164,1164,"Patient resting comfortably, vital signs within normal parameters."
+30000165,1165,"Afebrile, hemodynamically stable without vasopressor support."
+30000166,1166,"Afebrile, hemodynamically stable without vasopressor support."
+30000167,1167,"Afebrile, hemodynamically stable without vasopressor support."
+30000168,1168,"Patient resting comfortably, vital signs within normal parameters."
+30000169,1169,Post-operative recovery progressing well. No acute distress reported.
+30000170,1170,"Patient resting comfortably, vital signs within normal parameters."
+30000171,1171,"Patient resting comfortably, vital signs within normal parameters."
+30000172,1172,"Afebrile, hemodynamically stable without vasopressor support."
+30000173,1173,"Patient resting comfortably, vital signs within normal parameters."
+30000174,1174,"Afebrile, hemodynamically stable without vasopressor support."
+30000175,1175,Post-operative recovery progressing well. No acute distress reported.
+30000176,1176,"Patient resting comfortably, vital signs within normal parameters."
+30000177,1177,"Afebrile, hemodynamically stable without vasopressor support."
+30000178,1178,"Patient exhibits altered mental status, skin is warm and flushed."
+30000179,1179,"Afebrile, hemodynamically stable without vasopressor support."
+30000180,1180,"Patient resting comfortably, vital signs within normal parameters."
+30000181,1181,"Afebrile, hemodynamically stable without vasopressor support."
+30000182,1182,Fever spike observed with elevated white blood cell count and tachypnea.
+30000183,1183,Fever spike observed with elevated white blood cell count and tachypnea.
+30000184,1184,"Afebrile, hemodynamically stable without vasopressor support."
+30000185,1185,Post-operative recovery progressing well. No acute distress reported.
+30000186,1186,Post-operative recovery progressing well. No acute distress reported.
+30000187,1187,Post-operative recovery progressing well. No acute distress reported.
+30000188,1188,Post-operative recovery progressing well. No acute distress reported.
+30000189,1189,"Afebrile, hemodynamically stable without vasopressor support."
+30000190,1190,Post-operative recovery progressing well. No acute distress reported.
+30000191,1191,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000192,1192,"Patient exhibits altered mental status, skin is warm and flushed."
+30000193,1193,"Afebrile, hemodynamically stable without vasopressor support."
+30000194,1194,"Patient resting comfortably, vital signs within normal parameters."
+30000195,1195,Post-operative recovery progressing well. No acute distress reported.
+30000196,1196,Post-operative recovery progressing well. No acute distress reported.
+30000197,1197,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000198,1198,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000199,1199,"Afebrile, hemodynamically stable without vasopressor support."
+30000200,1200,"Afebrile, hemodynamically stable without vasopressor support."
+30000201,1201,Post-operative recovery progressing well. No acute distress reported.
+30000202,1202,"Afebrile, hemodynamically stable without vasopressor support."
+30000203,1203,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000204,1204,Post-operative recovery progressing well. No acute distress reported.
+30000205,1205,"Patient resting comfortably, vital signs within normal parameters."
+30000206,1206,Post-operative recovery progressing well. No acute distress reported.
+30000207,1207,"Patient resting comfortably, vital signs within normal parameters."
+30000208,1208,"Patient resting comfortably, vital signs within normal parameters."
+30000209,1209,"Afebrile, hemodynamically stable without vasopressor support."
+30000210,1210,"Patient resting comfortably, vital signs within normal parameters."
+30000211,1211,"Afebrile, hemodynamically stable without vasopressor support."
+30000212,1212,"Afebrile, hemodynamically stable without vasopressor support."
+30000213,1213,Post-operative recovery progressing well. No acute distress reported.
+30000214,1214,"Patient resting comfortably, vital signs within normal parameters."
+30000215,1215,"Afebrile, hemodynamically stable without vasopressor support."
+30000216,1216,"Afebrile, hemodynamically stable without vasopressor support."
+30000217,1217,"Patient resting comfortably, vital signs within normal parameters."
+30000218,1218,Post-operative recovery progressing well. No acute distress reported.
+30000219,1219,"Patient resting comfortably, vital signs within normal parameters."
+30000220,1220,"Patient resting comfortably, vital signs within normal parameters."
+30000221,1221,"Patient resting comfortably, vital signs within normal parameters."
+30000222,1222,Post-operative recovery progressing well. No acute distress reported.
+30000223,1223,Post-operative recovery progressing well. No acute distress reported.
+30000224,1224,Post-operative recovery progressing well. No acute distress reported.
+30000225,1225,"Patient resting comfortably, vital signs within normal parameters."
+30000226,1226,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000227,1227,"Patient resting comfortably, vital signs within normal parameters."
+30000228,1228,"Patient exhibits altered mental status, skin is warm and flushed."
+30000229,1229,Post-operative recovery progressing well. No acute distress reported.
+30000230,1230,Post-operative recovery progressing well. No acute distress reported.
+30000231,1231,"Patient resting comfortably, vital signs within normal parameters."
+30000232,1232,"Afebrile, hemodynamically stable without vasopressor support."
+30000233,1233,Post-operative recovery progressing well. No acute distress reported.
+30000234,1234,Post-operative recovery progressing well. No acute distress reported.
+30000235,1235,"Patient resting comfortably, vital signs within normal parameters."
+30000236,1236,"Afebrile, hemodynamically stable without vasopressor support."
+30000237,1237,"Afebrile, hemodynamically stable without vasopressor support."
+30000238,1238,"Patient resting comfortably, vital signs within normal parameters."
+30000239,1239,"Patient resting comfortably, vital signs within normal parameters."
+30000240,1240,Fever spike observed with elevated white blood cell count and tachypnea.
+30000241,1241,Fever spike observed with elevated white blood cell count and tachypnea.
+30000242,1242,"Patient exhibits altered mental status, skin is warm and flushed."
+30000243,1243,Post-operative recovery progressing well. No acute distress reported.
+30000244,1244,"Afebrile, hemodynamically stable without vasopressor support."
+30000245,1245,Fever spike observed with elevated white blood cell count and tachypnea.
+30000246,1246,"Afebrile, hemodynamically stable without vasopressor support."
+30000247,1247,Fever spike observed with elevated white blood cell count and tachypnea.
+30000248,1248,"Patient exhibits altered mental status, skin is warm and flushed."
+30000249,1249,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000250,1250,"Afebrile, hemodynamically stable without vasopressor support."
+30000251,1251,Post-operative recovery progressing well. No acute distress reported.
+30000252,1252,"Patient exhibits altered mental status, skin is warm and flushed."
+30000253,1253,"Patient resting comfortably, vital signs within normal parameters."
+30000254,1254,"Patient resting comfortably, vital signs within normal parameters."
+30000255,1255,Post-operative recovery progressing well. No acute distress reported.
+30000256,1256,Fever spike observed with elevated white blood cell count and tachypnea.
+30000257,1257,"Patient resting comfortably, vital signs within normal parameters."
+30000258,1258,"Afebrile, hemodynamically stable without vasopressor support."
+30000259,1259,Post-operative recovery progressing well. No acute distress reported.
+30000260,1260,"Patient resting comfortably, vital signs within normal parameters."
+30000261,1261,"Patient exhibits altered mental status, skin is warm and flushed."
+30000262,1262,"Afebrile, hemodynamically stable without vasopressor support."
+30000263,1263,"Patient resting comfortably, vital signs within normal parameters."
+30000264,1264,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000265,1265,Post-operative recovery progressing well. No acute distress reported.
+30000266,1266,"Patient resting comfortably, vital signs within normal parameters."
+30000267,1267,"Patient resting comfortably, vital signs within normal parameters."
+30000268,1268,"Afebrile, hemodynamically stable without vasopressor support."
+30000269,1269,Post-operative recovery progressing well. No acute distress reported.
+30000270,1270,"Afebrile, hemodynamically stable without vasopressor support."
+30000271,1271,Post-operative recovery progressing well. No acute distress reported.
+30000272,1272,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000273,1273,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000274,1274,Post-operative recovery progressing well. No acute distress reported.
+30000275,1275,Post-operative recovery progressing well. No acute distress reported.
+30000276,1276,"Patient resting comfortably, vital signs within normal parameters."
+30000277,1277,Post-operative recovery progressing well. No acute distress reported.
+30000278,1278,"Patient resting comfortably, vital signs within normal parameters."
+30000279,1279,"Patient resting comfortably, vital signs within normal parameters."
+30000280,1280,Fever spike observed with elevated white blood cell count and tachypnea.
+30000281,1281,"Patient resting comfortably, vital signs within normal parameters."
+30000282,1282,"Afebrile, hemodynamically stable without vasopressor support."
+30000283,1283,Post-operative recovery progressing well. No acute distress reported.
+30000284,1284,"Patient resting comfortably, vital signs within normal parameters."
+30000285,1285,"Patient resting comfortably, vital signs within normal parameters."
+30000286,1286,"Afebrile, hemodynamically stable without vasopressor support."
+30000287,1287,"Afebrile, hemodynamically stable without vasopressor support."
+30000288,1288,"Afebrile, hemodynamically stable without vasopressor support."
+30000289,1289,"Patient resting comfortably, vital signs within normal parameters."
+30000290,1290,Post-operative recovery progressing well. No acute distress reported.
+30000291,1291,"Afebrile, hemodynamically stable without vasopressor support."
+30000292,1292,"Afebrile, hemodynamically stable without vasopressor support."
+30000293,1293,Post-operative recovery progressing well. No acute distress reported.
+30000294,1294,Post-operative recovery progressing well. No acute distress reported.
+30000295,1295,Post-operative recovery progressing well. No acute distress reported.
+30000296,1296,Post-operative recovery progressing well. No acute distress reported.
+30000297,1297,Post-operative recovery progressing well. No acute distress reported.
+30000298,1298,"Afebrile, hemodynamically stable without vasopressor support."
+30000299,1299,"Afebrile, hemodynamically stable without vasopressor support."
+30000300,1300,Post-operative recovery progressing well. No acute distress reported.
+30000301,1301,"Patient resting comfortably, vital signs within normal parameters."
+30000302,1302,"Patient resting comfortably, vital signs within normal parameters."
+30000303,1303,Post-operative recovery progressing well. No acute distress reported.
+30000304,1304,"Afebrile, hemodynamically stable without vasopressor support."
+30000305,1305,Fever spike observed with elevated white blood cell count and tachypnea.
+30000306,1306,Post-operative recovery progressing well. No acute distress reported.
+30000307,1307,"Patient resting comfortably, vital signs within normal parameters."
+30000308,1308,"Patient resting comfortably, vital signs within normal parameters."
+30000309,1309,Post-operative recovery progressing well. No acute distress reported.
+30000310,1310,"Afebrile, hemodynamically stable without vasopressor support."
+30000311,1311,Post-operative recovery progressing well. No acute distress reported.
+30000312,1312,"Afebrile, hemodynamically stable without vasopressor support."
+30000313,1313,"Patient exhibits altered mental status, skin is warm and flushed."
+30000314,1314,Post-operative recovery progressing well. No acute distress reported.
+30000315,1315,"Patient resting comfortably, vital signs within normal parameters."
+30000316,1316,Post-operative recovery progressing well. No acute distress reported.
+30000317,1317,Post-operative recovery progressing well. No acute distress reported.
+30000318,1318,"Afebrile, hemodynamically stable without vasopressor support."
+30000319,1319,Post-operative recovery progressing well. No acute distress reported.
+30000320,1320,"Patient resting comfortably, vital signs within normal parameters."
+30000321,1321,"Patient resting comfortably, vital signs within normal parameters."
+30000322,1322,Post-operative recovery progressing well. No acute distress reported.
+30000323,1323,"Patient resting comfortably, vital signs within normal parameters."
+30000324,1324,Fever spike observed with elevated white blood cell count and tachypnea.
+30000325,1325,Post-operative recovery progressing well. No acute distress reported.
+30000326,1326,"Afebrile, hemodynamically stable without vasopressor support."
+30000327,1327,"Patient resting comfortably, vital signs within normal parameters."
+30000328,1328,Post-operative recovery progressing well. No acute distress reported.
+30000329,1329,"Afebrile, hemodynamically stable without vasopressor support."
+30000330,1330,Post-operative recovery progressing well. No acute distress reported.
+30000331,1331,Post-operative recovery progressing well. No acute distress reported.
+30000332,1332,"Patient resting comfortably, vital signs within normal parameters."
+30000333,1333,"Afebrile, hemodynamically stable without vasopressor support."
+30000334,1334,"Patient resting comfortably, vital signs within normal parameters."
+30000335,1335,Post-operative recovery progressing well. No acute distress reported.
+30000336,1336,"Patient exhibits altered mental status, skin is warm and flushed."
+30000337,1337,Post-operative recovery progressing well. No acute distress reported.
+30000338,1338,Post-operative recovery progressing well. No acute distress reported.
+30000339,1339,Post-operative recovery progressing well. No acute distress reported.
+30000340,1340,"Afebrile, hemodynamically stable without vasopressor support."
+30000341,1341,"Afebrile, hemodynamically stable without vasopressor support."
+30000342,1342,Post-operative recovery progressing well. No acute distress reported.
+30000343,1343,Post-operative recovery progressing well. No acute distress reported.
+30000344,1344,"Patient resting comfortably, vital signs within normal parameters."
+30000345,1345,"Patient resting comfortably, vital signs within normal parameters."
+30000346,1346,"Patient resting comfortably, vital signs within normal parameters."
+30000347,1347,Post-operative recovery progressing well. No acute distress reported.
+30000348,1348,"Patient resting comfortably, vital signs within normal parameters."
+30000349,1349,"Patient resting comfortably, vital signs within normal parameters."
+30000350,1350,"Afebrile, hemodynamically stable without vasopressor support."
+30000351,1351,Fever spike observed with elevated white blood cell count and tachypnea.
+30000352,1352,"Afebrile, hemodynamically stable without vasopressor support."
+30000353,1353,"Afebrile, hemodynamically stable without vasopressor support."
+30000354,1354,Post-operative recovery progressing well. No acute distress reported.
+30000355,1355,Post-operative recovery progressing well. No acute distress reported.
+30000356,1356,"Patient resting comfortably, vital signs within normal parameters."
+30000357,1357,"Afebrile, hemodynamically stable without vasopressor support."
+30000358,1358,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000359,1359,"Afebrile, hemodynamically stable without vasopressor support."
+30000360,1360,"Patient resting comfortably, vital signs within normal parameters."
+30000361,1361,Post-operative recovery progressing well. No acute distress reported.
+30000362,1362,"Afebrile, hemodynamically stable without vasopressor support."
+30000363,1363,"Patient resting comfortably, vital signs within normal parameters."
+30000364,1364,Fever spike observed with elevated white blood cell count and tachypnea.
+30000365,1365,"Patient resting comfortably, vital signs within normal parameters."
+30000366,1366,Fever spike observed with elevated white blood cell count and tachypnea.
+30000367,1367,Fever spike observed with elevated white blood cell count and tachypnea.
+30000368,1368,"Patient resting comfortably, vital signs within normal parameters."
+30000369,1369,"Afebrile, hemodynamically stable without vasopressor support."
+30000370,1370,"Patient resting comfortably, vital signs within normal parameters."
+30000371,1371,"Patient resting comfortably, vital signs within normal parameters."
+30000372,1372,"Afebrile, hemodynamically stable without vasopressor support."
+30000373,1373,"Patient resting comfortably, vital signs within normal parameters."
+30000374,1374,Post-operative recovery progressing well. No acute distress reported.
+30000375,1375,"Patient resting comfortably, vital signs within normal parameters."
+30000376,1376,"Patient resting comfortably, vital signs within normal parameters."
+30000377,1377,"Afebrile, hemodynamically stable without vasopressor support."
+30000378,1378,Post-operative recovery progressing well. No acute distress reported.
+30000379,1379,"Patient resting comfortably, vital signs within normal parameters."
+30000380,1380,"Afebrile, hemodynamically stable without vasopressor support."
+30000381,1381,"Afebrile, hemodynamically stable without vasopressor support."
+30000382,1382,"Patient resting comfortably, vital signs within normal parameters."
+30000383,1383,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000384,1384,Post-operative recovery progressing well. No acute distress reported.
+30000385,1385,"Afebrile, hemodynamically stable without vasopressor support."
+30000386,1386,"Patient resting comfortably, vital signs within normal parameters."
+30000387,1387,"Patient resting comfortably, vital signs within normal parameters."
+30000388,1388,Post-operative recovery progressing well. No acute distress reported.
+30000389,1389,Post-operative recovery progressing well. No acute distress reported.
+30000390,1390,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000391,1391,"Patient resting comfortably, vital signs within normal parameters."
+30000392,1392,"Patient resting comfortably, vital signs within normal parameters."
+30000393,1393,"Afebrile, hemodynamically stable without vasopressor support."
+30000394,1394,Post-operative recovery progressing well. No acute distress reported.
+30000395,1395,Fever spike observed with elevated white blood cell count and tachypnea.
+30000396,1396,Fever spike observed with elevated white blood cell count and tachypnea.
+30000397,1397,Post-operative recovery progressing well. No acute distress reported.
+30000398,1398,"Patient resting comfortably, vital signs within normal parameters."
+30000399,1399,"Patient resting comfortably, vital signs within normal parameters."
+30000400,1400,"Patient resting comfortably, vital signs within normal parameters."
+30000401,1401,"Patient exhibits altered mental status, skin is warm and flushed."
+30000402,1402,Post-operative recovery progressing well. No acute distress reported.
+30000403,1403,Post-operative recovery progressing well. No acute distress reported.
+30000404,1404,Post-operative recovery progressing well. No acute distress reported.
+30000405,1405,"Patient exhibits altered mental status, skin is warm and flushed."
+30000406,1406,Post-operative recovery progressing well. No acute distress reported.
+30000407,1407,"Afebrile, hemodynamically stable without vasopressor support."
+30000408,1408,Fever spike observed with elevated white blood cell count and tachypnea.
+30000409,1409,"Patient resting comfortably, vital signs within normal parameters."
+30000410,1410,Post-operative recovery progressing well. No acute distress reported.
+30000411,1411,Fever spike observed with elevated white blood cell count and tachypnea.
+30000412,1412,"Patient exhibits altered mental status, skin is warm and flushed."
+30000413,1413,"Patient resting comfortably, vital signs within normal parameters."
+30000414,1414,"Afebrile, hemodynamically stable without vasopressor support."
+30000415,1415,"Patient resting comfortably, vital signs within normal parameters."
+30000416,1416,"Afebrile, hemodynamically stable without vasopressor support."
+30000417,1417,Post-operative recovery progressing well. No acute distress reported.
+30000418,1418,"Patient resting comfortably, vital signs within normal parameters."
+30000419,1419,"Afebrile, hemodynamically stable without vasopressor support."
+30000420,1420,Post-operative recovery progressing well. No acute distress reported.
+30000421,1421,"Afebrile, hemodynamically stable without vasopressor support."
+30000422,1422,"Patient resting comfortably, vital signs within normal parameters."
+30000423,1423,"Afebrile, hemodynamically stable without vasopressor support."
+30000424,1424,Post-operative recovery progressing well. No acute distress reported.
+30000425,1425,"Afebrile, hemodynamically stable without vasopressor support."
+30000426,1426,"Afebrile, hemodynamically stable without vasopressor support."
+30000427,1427,"Patient exhibits altered mental status, skin is warm and flushed."
+30000428,1428,"Patient resting comfortably, vital signs within normal parameters."
+30000429,1429,Post-operative recovery progressing well. No acute distress reported.
+30000430,1430,"Patient resting comfortably, vital signs within normal parameters."
+30000431,1431,Post-operative recovery progressing well. No acute distress reported.
+30000432,1432,Post-operative recovery progressing well. No acute distress reported.
+30000433,1433,Post-operative recovery progressing well. No acute distress reported.
+30000434,1434,"Afebrile, hemodynamically stable without vasopressor support."
+30000435,1435,"Patient resting comfortably, vital signs within normal parameters."
+30000436,1436,"Afebrile, hemodynamically stable without vasopressor support."
+30000437,1437,"Afebrile, hemodynamically stable without vasopressor support."
+30000438,1438,"Afebrile, hemodynamically stable without vasopressor support."
+30000439,1439,"Afebrile, hemodynamically stable without vasopressor support."
+30000440,1440,"Afebrile, hemodynamically stable without vasopressor support."
+30000441,1441,"Patient exhibits altered mental status, skin is warm and flushed."
+30000442,1442,"Patient resting comfortably, vital signs within normal parameters."
+30000443,1443,Post-operative recovery progressing well. No acute distress reported.
+30000444,1444,"Patient resting comfortably, vital signs within normal parameters."
+30000445,1445,Fever spike observed with elevated white blood cell count and tachypnea.
+30000446,1446,Fever spike observed with elevated white blood cell count and tachypnea.
+30000447,1447,Post-operative recovery progressing well. No acute distress reported.
+30000448,1448,"Patient resting comfortably, vital signs within normal parameters."
+30000449,1449,"Patient resting comfortably, vital signs within normal parameters."
+30000450,1450,Post-operative recovery progressing well. No acute distress reported.
+30000451,1451,"Afebrile, hemodynamically stable without vasopressor support."
+30000452,1452,"Afebrile, hemodynamically stable without vasopressor support."
+30000453,1453,Fever spike observed with elevated white blood cell count and tachypnea.
+30000454,1454,"Afebrile, hemodynamically stable without vasopressor support."
+30000455,1455,"Afebrile, hemodynamically stable without vasopressor support."
+30000456,1456,"Patient resting comfortably, vital signs within normal parameters."
+30000457,1457,Post-operative recovery progressing well. No acute distress reported.
+30000458,1458,Post-operative recovery progressing well. No acute distress reported.
+30000459,1459,"Patient resting comfortably, vital signs within normal parameters."
+30000460,1460,"Patient resting comfortably, vital signs within normal parameters."
+30000461,1461,"Patient resting comfortably, vital signs within normal parameters."
+30000462,1462,"Afebrile, hemodynamically stable without vasopressor support."
+30000463,1463,Post-operative recovery progressing well. No acute distress reported.
+30000464,1464,"Patient exhibits altered mental status, skin is warm and flushed."
+30000465,1465,"Patient resting comfortably, vital signs within normal parameters."
+30000466,1466,Post-operative recovery progressing well. No acute distress reported.
+30000467,1467,"Patient exhibits altered mental status, skin is warm and flushed."
+30000468,1468,"Afebrile, hemodynamically stable without vasopressor support."
+30000469,1469,"Patient exhibits altered mental status, skin is warm and flushed."
+30000470,1470,"Patient resting comfortably, vital signs within normal parameters."
+30000471,1471,"Patient exhibits altered mental status, skin is warm and flushed."
+30000472,1472,Post-operative recovery progressing well. No acute distress reported.
+30000473,1473,Fever spike observed with elevated white blood cell count and tachypnea.
+30000474,1474,"Patient resting comfortably, vital signs within normal parameters."
+30000475,1475,Fever spike observed with elevated white blood cell count and tachypnea.
+30000476,1476,"Afebrile, hemodynamically stable without vasopressor support."
+30000477,1477,"Afebrile, hemodynamically stable without vasopressor support."
+30000478,1478,Fever spike observed with elevated white blood cell count and tachypnea.
+30000479,1479,"Afebrile, hemodynamically stable without vasopressor support."
+30000480,1480,Post-operative recovery progressing well. No acute distress reported.
+30000481,1481,Post-operative recovery progressing well. No acute distress reported.
+30000482,1482,"Afebrile, hemodynamically stable without vasopressor support."
+30000483,1483,Post-operative recovery progressing well. No acute distress reported.
+30000484,1484,"Patient resting comfortably, vital signs within normal parameters."
+30000485,1485,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000486,1486,Post-operative recovery progressing well. No acute distress reported.
+30000487,1487,Post-operative recovery progressing well. No acute distress reported.
+30000488,1488,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000489,1489,"Patient exhibits altered mental status, skin is warm and flushed."
+30000490,1490,"Patient resting comfortably, vital signs within normal parameters."
+30000491,1491,Post-operative recovery progressing well. No acute distress reported.
+30000492,1492,Post-operative recovery progressing well. No acute distress reported.
+30000493,1493,"Patient resting comfortably, vital signs within normal parameters."
+30000494,1494,"Afebrile, hemodynamically stable without vasopressor support."
+30000495,1495,"Afebrile, hemodynamically stable without vasopressor support."
+30000496,1496,"Patient resting comfortably, vital signs within normal parameters."
+30000497,1497,Post-operative recovery progressing well. No acute distress reported.
+30000498,1498,Persistent hypotension despite fluid resuscitation. Suspect occult infection.
+30000499,1499,"Patient exhibits altered mental status, skin is warm and flushed."

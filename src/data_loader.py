@@ -26,10 +26,13 @@ def load_real_mimic_data(data_dir=Config.DATA_RAW_DIR):
     labels = tabular_df['sepsis_label'].values
     tabular_df = tabular_df.drop(columns=['subject_id', 'stay_id', 'sepsis_label'], errors='ignore')
 
-    # Load and reshape time-series (Patients x 24 Hours x 5 Vitals)
+    # Load time-series, drop stay_id and hour_step to isolate 5 vitals features
     ts_df = pd.read_csv(ts_path)
+    vital_cols = ['heart_rate', 'resp_rate', 'mean_arterial_pressure', 'temperature', 'wbc_count']
+    ts_vitals = ts_df[vital_cols].values
+    
     num_patients = len(tabular_df)
-    time_series_data = ts_df.iloc[:, 1:].values.reshape(num_patients, Config.SEQ_LEN, 5)
+    time_series_data = ts_vitals.reshape(num_patients, Config.SEQ_LEN, 5)
 
     # Load text notes
     notes_df = pd.read_csv(notes_path)
