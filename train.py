@@ -1,7 +1,6 @@
 import os
 import sys
 
-# Set non-interactive Matplotlib backend BEFORE importing pyplot to prevent Tcl/Tk errors
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -9,24 +8,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, average_precision_score, classification_report
+from sklearn.metrics import roc_auc_score, average_precision_score
 import shap
 
 from src.config import Config
 from src.data_loader import generate_synthetic_data
+from src.models_text import BioClinicalBERTClassifier
 
-# Set random seeds for reproducibility
 np.random.seed(Config.SEED)
 torch.manual_seed(Config.SEED)
 
-# ==========================================
-# 1. TEMPORAL LSTM MODULE
-# ==========================================
+# Temporal LSTM Model
 class TemporalLSTM(nn.Module):
     def __init__(self, input_dim=5, hidden_dim=32, num_layers=1):
         super(TemporalLSTM, self).__init__()
@@ -35,124 +31,122 @@ class TemporalLSTM(nn.Module):
         
     def forward(self, x):
         lstm_out, (h_n, _) = self.lstm(x)
-        last_hidden = h_n[-1]
-        out = torch.sigmoid(self.fc(last_hidden))
-        return out, last_hidden
+        out = torch.sigmoid(self.fc(h_n[-1]))
+        return out
 
-# ==========================================
-# 2. MAIN TRAINING PIPELINE
-# ==========================================
 def main():
-    print("="*60)
-    print("   SEPSIS MULTIMODAL LATE FUSION PIPELINE RUN   ")
-    print("="*60)
+    print("="*65)
+    print("   MULTIMODAL SEPSIS PIPELINE: 5-FOLD CV + BIOCLINICALBERT   ")
+    print("="*65)
 
-    # Step A: Load Data
-    print("\n[1/5] Loading Multimodal Dataset...")
-    tabular_df, time_series_data, text_corpus, labels = generate_synthetic_data(num_patients=600)
+    # 1. Load Data
+    print("\n[1/4] Loading Cohort Dataset...")
+    tabular_df, time_series_data, text_corpus, labels = generate_synthetic_data(num_patients=300)
+
+    # 2. Extract BioClinicalBERT Embeddings
+    print("\n[2/4] Extracting BioClinicalBERT Embeddings from Notes...")
+    bert_module = BioClinicalBERTClassifier()
+    text_embeddings = bert_module.extract_embeddings(text_corpus)
+    print(f" -> Text Embeddings Shape: {text_embeddings.shape}")
+
+    # 3. Stratified 5-Fold Cross Validation Setup
+    skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=Config.SEED)
     
-    # Split indices (80% train, 20% test)
-    indices = np.arange(len(labels))
-    idx_train, idx_test, y_train, y_test = train_test_split(
-        indices, labels, test_size=0.2, random_state=Config.SEED, stratify=labels
-    )
+    cv_scores = {
+        'tabular_auroc': [],
+        'temporal_auroc': [],
+        'text_auroc': [],
+        'fusion_auroc': [],
+        'fusion_auprc': []
+    }
 
-    # --- BRANCH 1: TABULAR MODEL (Random Forest) ---
-    print("\n[2/5] Training Tabular Branch (Random Forest)...")
-    X_tab_train, X_tab_test = tabular_df.iloc[idx_train], tabular_df.iloc[idx_test]
-    scaler = StandardScaler()
-    X_tab_train_scaled = scaler.fit_transform(X_tab_train)
-    X_tab_test_scaled = scaler.transform(X_tab_test)
+    print("\n[3/4] Running 5-Fold Stratified Cross-Validation...")
+    for fold, (train_idx, val_idx) in enumerate(skf.split(tabular_df, labels), 1):
+        y_train, y_val = labels[train_idx], labels[val_idx]
 
-    rf_model = RandomForestClassifier(n_estimators=100, random_state=Config.SEED, class_weight='balanced')
-    rf_model.fit(X_tab_train_scaled, y_train)
+        # --- Tabular Branch ---
+        X_tab_train, X_tab_val = tabular_df.iloc[train_idx], tabular_df.iloc[val_idx]
+        scaler = StandardScaler()
+        X_tab_train_s = scaler.fit_transform(X_tab_train)
+        X_tab_val_s = scaler.transform(X_tab_val)
 
-    train_tab_probs = rf_model.predict_proba(X_tab_train_scaled)[:, 1]
-    test_tab_probs = rf_model.predict_proba(X_tab_test_scaled)[:, 1]
-    print(f" -> Tabular AUROC: {roc_auc_score(y_test, test_tab_probs):.4f}")
+        rf_model = RandomForestClassifier(n_estimators=100, random_state=Config.SEED, class_weight='balanced')
+        rf_model.fit(X_tab_train_s, y_train)
+        pred_tab_train = rf_model.predict_proba(X_tab_train_s)[:, 1]
+        pred_tab_val = rf_model.predict_proba(X_tab_val_s)[:, 1]
 
-    # --- BRANCH 2: TEMPORAL TIME-SERIES MODEL (LSTM) ---
-    print("\n[3/5] Training Temporal Branch (PyTorch LSTM)...")
-    X_ts_train_t = torch.tensor(time_series_data[idx_train], dtype=torch.float32)
-    y_train_t = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
-    X_ts_test_t = torch.tensor(time_series_data[idx_test], dtype=torch.float32)
+        # --- Temporal LSTM Branch ---
+        X_ts_train_t = torch.tensor(time_series_data[train_idx], dtype=torch.float32)
+        y_train_t = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
+        X_ts_val_t = torch.tensor(time_series_data[val_idx], dtype=torch.float32)
 
-    lstm_model = TemporalLSTM()
-    criterion = nn.BCELoss()
-    optimizer = torch.optim.Adam(lstm_model.parameters(), lr=0.005)
+        lstm_model = TemporalLSTM()
+        optimizer = torch.optim.Adam(lstm_model.parameters(), lr=0.005)
+        criterion = nn.BCELoss()
 
-    lstm_model.train()
-    for epoch in range(15):
-        optimizer.zero_grad()
-        preds, _ = lstm_model(X_ts_train_t)
-        loss = criterion(preds, y_train_t)
-        loss.backward()
-        optimizer.step()
+        lstm_model.train()
+        for epoch in range(12):
+            optimizer.zero_grad()
+            out = lstm_model(X_ts_train_t)
+            loss = criterion(out, y_train_t)
+            loss.backward()
+            optimizer.step()
 
-    lstm_model.eval()
-    with torch.no_grad():
-        train_ts_probs, _ = lstm_model(X_ts_train_t)
-        test_ts_probs, _ = lstm_model(X_ts_test_t)
-    
-    train_ts_probs = train_ts_probs.numpy().flatten()
-    test_ts_probs = test_ts_probs.numpy().flatten()
-    print(f" -> Temporal AUROC: {roc_auc_score(y_test, test_ts_probs):.4f}")
+        lstm_model.eval()
+        with torch.no_grad():
+            pred_ts_train = lstm_model(X_ts_train_t).numpy().flatten()
+            pred_ts_val = lstm_model(X_ts_val_t).numpy().flatten()
 
-    # --- BRANCH 3: TEXT NLP MODEL (TF-IDF Baseline) ---
-    print("\n[4/5] Training Text Branch (TF-IDF Narrative Vectorizer)...")
-    train_texts = [text_corpus[i] for i in idx_train]
-    test_texts = [text_corpus[i] for i in idx_test]
+        # --- Text BioClinicalBERT Branch ---
+        X_text_train, X_text_val = text_embeddings[train_idx], text_embeddings[val_idx]
+        text_clf = LogisticRegression(max_iter=500, class_weight='balanced')
+        text_clf.fit(X_text_train, y_train)
+        pred_text_train = text_clf.predict_proba(X_text_train)[:, 1]
+        pred_text_val = text_clf.predict_proba(X_text_val)[:, 1]
 
-    vectorizer = TfidfVectorizer(max_features=50, stop_words='english')
-    X_text_train = vectorizer.fit_transform(train_texts).toarray()
-    X_text_test = vectorizer.transform(test_texts).toarray()
+        # --- Late Fusion Meta-Learner ---
+        meta_train = np.column_stack([pred_tab_train, pred_ts_train, pred_text_train])
+        meta_val = np.column_stack([pred_tab_val, pred_ts_val, pred_text_val])
 
-    text_model = RandomForestClassifier(n_estimators=50, random_state=Config.SEED, class_weight='balanced')
-    text_model.fit(X_text_train, y_train)
+        meta_learner = LogisticRegression()
+        meta_learner.fit(meta_train, y_train)
+        pred_fusion = meta_learner.predict_proba(meta_val)[:, 1]
 
-    train_text_probs = text_model.predict_proba(X_text_train)[:, 1]
-    test_text_probs = text_model.predict_proba(X_text_test)[:, 1]
-    print(f" -> Text NLP AUROC: {roc_auc_score(y_test, test_text_probs):.4f}")
+        # Metrics Recording
+        cv_scores['tabular_auroc'].append(roc_auc_score(y_val, pred_tab_val))
+        cv_scores['temporal_auroc'].append(roc_auc_score(y_val, pred_ts_val))
+        cv_scores['text_auroc'].append(roc_auc_score(y_val, pred_text_val))
+        cv_scores['fusion_auroc'].append(roc_auc_score(y_val, pred_fusion))
+        cv_scores['fusion_auprc'].append(average_precision_score(y_val, pred_fusion))
 
-    # --- MULTIMODAL LATE FUSION META-LEARNER ---
-    print("\n[5/5] Combining Modalities via Late Fusion Meta-Learner...")
-    X_fusion_train = np.column_stack([train_tab_probs, train_ts_probs, train_text_probs])
-    X_fusion_test = np.column_stack([test_tab_probs, test_ts_probs, test_text_probs])
+        print(f"  Fold {fold}/5 -> Tabular: {cv_scores['tabular_auroc'][-1]:.4f} | "
+              f"Temporal: {cv_scores['temporal_auroc'][-1]:.4f} | "
+              f"Text(BERT): {cv_scores['text_auroc'][-1]:.4f} | "
+              f"Fusion AUROC: {cv_scores['fusion_auroc'][-1]:.4f}")
 
-    meta_learner = LogisticRegression()
-    meta_learner.fit(X_fusion_train, y_train)
+    print("\n" + "="*65)
+    print("           CROSS-VALIDATION EVALUATION RESULTS           ")
+    print("="*65)
+    print(f" Tabular AUROC:       {np.mean(cv_scores['tabular_auroc']):.4f} ± {np.std(cv_scores['tabular_auroc']):.4f}")
+    print(f" Temporal LSTM AUROC: {np.mean(cv_scores['temporal_auroc']):.4f} ± {np.std(cv_scores['temporal_auroc']):.4f}")
+    print(f" BioClinicalBERT:     {np.mean(cv_scores['text_auroc']):.4f} ± {np.std(cv_scores['text_auroc']):.4f}")
+    print(f" Multimodal Fusion:   {np.mean(cv_scores['fusion_auroc']):.4f} ± {np.std(cv_scores['fusion_auroc']):.4f}")
+    print(f" Multimodal AUPRC:    {np.mean(cv_scores['fusion_auprc']):.4f} ± {np.std(cv_scores['fusion_auprc']):.4f}")
 
-    final_probs = meta_learner.predict_proba(X_fusion_test)[:, 1]
-
-    print("\n" + "="*60)
-    print("             FINAL MULTIMODAL EVALUATION             ")
-    print("="*60)
-    print(f"Final Multimodal AUROC: {roc_auc_score(y_test, final_probs):.4f}")
-    print(f"Final Multimodal AUPRC: {average_precision_score(y_test, final_probs):.4f}")
-    print("\nDetailed Performance Report:")
-    print(classification_report(y_test, (final_probs > 0.5).astype(int)))
-
-    # --- SHAP EXPLAINABILITY ---
-    print("\nGenerating SHAP Feature Attribution Plot...")
+    # 4. Generate SHAP Plot
+    print("\n[4/4] Generating SHAP Explanation Plot...")
     explainer = shap.TreeExplainer(rf_model)
-    shap_values = explainer(X_tab_test_scaled)
-    
+    shap_values = explainer(X_tab_val_s)
     shap_vals_class1 = shap_values.values[:, :, 1] if len(shap_values.shape) == 3 else shap_values.values
 
     fig = plt.figure(figsize=(8, 5))
-    shap.summary_plot(
-        shap_vals_class1, 
-        features=X_tab_test, 
-        feature_names=X_tab_test.columns.tolist(),
-        show=False
-    )
-    
+    shap.summary_plot(shap_vals_class1, features=X_tab_val, feature_names=X_tab_val.columns.tolist(), show=False)
     save_path = os.path.join(Config.OUTPUT_FIGURES_DIR, "shap_summary.png")
     plt.title("SHAP Feature Importance (Structured Vitals/Labs)", fontsize=12)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.close('all')
-    print(f"[OK] SHAP Explanation saved to: {save_path}")
+    print(f"[OK] Updated SHAP plot saved to: {save_path}")
 
 if __name__ == "__main__":
     main()
