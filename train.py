@@ -12,17 +12,16 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, average_precision_score
+from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 import shap
 
 from src.config import Config
-from src.data_loader import generate_synthetic_data
+from src.data_loader import load_real_mimic_data
 from src.models_text import BioClinicalBERTClassifier
 
 np.random.seed(Config.SEED)
 torch.manual_seed(Config.SEED)
 
-# Temporal LSTM Model
 class TemporalLSTM(nn.Module):
     def __init__(self, input_dim=5, hidden_dim=32, num_layers=1):
         super(TemporalLSTM, self).__init__()
@@ -36,117 +35,119 @@ class TemporalLSTM(nn.Module):
 
 def main():
     print("="*65)
-    print("   MULTIMODAL SEPSIS PIPELINE: 5-FOLD CV + BIOCLINICALBERT   ")
+    print("   THESIS EVALUATION PIPELINE: 5-FOLD CV & ROC CURVE EXPORT   ")
     print("="*65)
 
-    # 1. Load Data
-    print("\n[1/4] Loading Cohort Dataset...")
-    tabular_df, time_series_data, text_corpus, labels = generate_synthetic_data(num_patients=300)
+    # 1. Ingest Data
+    tabular_df, time_series_data, text_corpus, labels = load_real_mimic_data()
 
-    # 2. Extract BioClinicalBERT Embeddings
-    print("\n[2/4] Extracting BioClinicalBERT Embeddings from Notes...")
+    # 2. Extract BioClinicalBERT Features
     bert_module = BioClinicalBERTClassifier()
     text_embeddings = bert_module.extract_embeddings(text_corpus)
-    print(f" -> Text Embeddings Shape: {text_embeddings.shape}")
 
-    # 3. Stratified 5-Fold Cross Validation Setup
+    # 3. Stratified 5-Fold Cross Validation
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=Config.SEED)
     
-    cv_scores = {
-        'tabular_auroc': [],
-        'temporal_auroc': [],
-        'text_auroc': [],
-        'fusion_auroc': [],
-        'fusion_auprc': []
-    }
+    metrics = {'Tabular': [], 'Temporal LSTM': [], 'BioClinicalBERT': [], 'Late Fusion': []}
+    auprc_metrics = {'Tabular': [], 'Temporal LSTM': [], 'BioClinicalBERT': [], 'Late Fusion': []}
+    
+    last_val_y = None
+    last_preds = {}
 
-    print("\n[3/4] Running 5-Fold Stratified Cross-Validation...")
     for fold, (train_idx, val_idx) in enumerate(skf.split(tabular_df, labels), 1):
         y_train, y_val = labels[train_idx], labels[val_idx]
 
-        # --- Tabular Branch ---
-        X_tab_train, X_tab_val = tabular_df.iloc[train_idx], tabular_df.iloc[val_idx]
+        # Tabular
         scaler = StandardScaler()
-        X_tab_train_s = scaler.fit_transform(X_tab_train)
-        X_tab_val_s = scaler.transform(X_tab_val)
+        X_tab_train_s = scaler.fit_transform(tabular_df.iloc[train_idx])
+        X_tab_val_s = scaler.transform(tabular_df.iloc[val_idx])
 
-        rf_model = RandomForestClassifier(n_estimators=100, random_state=Config.SEED, class_weight='balanced')
-        rf_model.fit(X_tab_train_s, y_train)
-        pred_tab_train = rf_model.predict_proba(X_tab_train_s)[:, 1]
-        pred_tab_val = rf_model.predict_proba(X_tab_val_s)[:, 1]
+        rf = RandomForestClassifier(n_estimators=100, random_state=Config.SEED, class_weight='balanced')
+        rf.fit(X_tab_train_s, y_train)
+        pred_tab_tr = rf.predict_proba(X_tab_train_s)[:, 1]
+        pred_tab_val = rf.predict_proba(X_tab_val_s)[:, 1]
 
-        # --- Temporal LSTM Branch ---
-        X_ts_train_t = torch.tensor(time_series_data[train_idx], dtype=torch.float32)
-        y_train_t = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
-        X_ts_val_t = torch.tensor(time_series_data[val_idx], dtype=torch.float32)
+        # Temporal LSTM
+        X_ts_tr = torch.tensor(time_series_data[train_idx], dtype=torch.float32)
+        y_ts_tr = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
+        X_ts_val = torch.tensor(time_series_data[val_idx], dtype=torch.float32)
 
-        lstm_model = TemporalLSTM()
-        optimizer = torch.optim.Adam(lstm_model.parameters(), lr=0.005)
-        criterion = nn.BCELoss()
+        lstm = TemporalLSTM()
+        opt = torch.optim.Adam(lstm.parameters(), lr=0.005)
+        crit = nn.BCELoss()
 
-        lstm_model.train()
+        lstm.train()
         for epoch in range(12):
-            optimizer.zero_grad()
-            out = lstm_model(X_ts_train_t)
-            loss = criterion(out, y_train_t)
+            opt.zero_grad()
+            loss = crit(lstm(X_ts_tr), y_ts_tr)
             loss.backward()
-            optimizer.step()
+            opt.step()
 
-        lstm_model.eval()
+        lstm.eval()
         with torch.no_grad():
-            pred_ts_train = lstm_model(X_ts_train_t).numpy().flatten()
-            pred_ts_val = lstm_model(X_ts_val_t).numpy().flatten()
+            pred_ts_tr = lstm(X_ts_tr).numpy().flatten()
+            pred_ts_val = lstm(X_ts_val).numpy().flatten()
 
-        # --- Text BioClinicalBERT Branch ---
-        X_text_train, X_text_val = text_embeddings[train_idx], text_embeddings[val_idx]
+        # Text BioClinicalBERT
         text_clf = LogisticRegression(max_iter=500, class_weight='balanced')
-        text_clf.fit(X_text_train, y_train)
-        pred_text_train = text_clf.predict_proba(X_text_train)[:, 1]
-        pred_text_val = text_clf.predict_proba(X_text_val)[:, 1]
+        text_clf.fit(text_embeddings[train_idx], y_train)
+        pred_txt_tr = text_clf.predict_proba(text_embeddings[train_idx])[:, 1]
+        pred_txt_val = text_clf.predict_proba(text_embeddings[val_idx])[:, 1]
 
-        # --- Late Fusion Meta-Learner ---
-        meta_train = np.column_stack([pred_tab_train, pred_ts_train, pred_text_train])
-        meta_val = np.column_stack([pred_tab_val, pred_ts_val, pred_text_val])
+        # Late Fusion
+        meta_tr = np.column_stack([pred_tab_tr, pred_ts_tr, pred_txt_tr])
+        meta_val = np.column_stack([pred_tab_val, pred_ts_val, pred_txt_val])
 
-        meta_learner = LogisticRegression()
-        meta_learner.fit(meta_train, y_train)
-        pred_fusion = meta_learner.predict_proba(meta_val)[:, 1]
+        meta = LogisticRegression()
+        meta.fit(meta_tr, y_train)
+        pred_fusion = meta.predict_proba(meta_val)[:, 1]
 
-        # Metrics Recording
-        cv_scores['tabular_auroc'].append(roc_auc_score(y_val, pred_tab_val))
-        cv_scores['temporal_auroc'].append(roc_auc_score(y_val, pred_ts_val))
-        cv_scores['text_auroc'].append(roc_auc_score(y_val, pred_text_val))
-        cv_scores['fusion_auroc'].append(roc_auc_score(y_val, pred_fusion))
-        cv_scores['fusion_auprc'].append(average_precision_score(y_val, pred_fusion))
+        # Record metrics
+        preds = {'Tabular': pred_tab_val, 'Temporal LSTM': pred_ts_val, 'BioClinicalBERT': pred_txt_val, 'Late Fusion': pred_fusion}
+        for name, p in preds.items():
+            metrics[name].append(roc_auc_score(y_val, p))
+            auprc_metrics[name].append(average_precision_score(y_val, p))
 
-        print(f"  Fold {fold}/5 -> Tabular: {cv_scores['tabular_auroc'][-1]:.4f} | "
-              f"Temporal: {cv_scores['temporal_auroc'][-1]:.4f} | "
-              f"Text(BERT): {cv_scores['text_auroc'][-1]:.4f} | "
-              f"Fusion AUROC: {cv_scores['fusion_auroc'][-1]:.4f}")
+        if fold == 5:
+            last_val_y = y_val
+            last_preds = preds
 
+    # Plot Multi-Model ROC Curves
+    plt.figure(figsize=(8, 6))
+    for name, p in last_preds.items():
+        fpr, tpr, _ = roc_curve(last_val_y, p)
+        plt.plot(fpr, tpr, label=f"{name} (AUROC = {np.mean(metrics[name]):.3f})", lw=2)
+    
+    plt.plot([0, 1], [0, 1], 'k--', lw=1.5, label='Random Baseline')
+    plt.xlabel('False Positive Rate (1 - Specificity)', fontsize=11)
+    plt.ylabel('True Positive Rate (Sensitivity)', fontsize=11)
+    plt.title('Receiver Operating Characteristic (ROC) Comparison', fontsize=13)
+    plt.legend(loc='lower right')
+    plt.grid(True, alpha=0.3)
+    
+    roc_path = os.path.join(Config.OUTPUT_FIGURES_DIR, "roc_comparison.png")
+    plt.savefig(roc_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[OK] ROC Comparison Plot exported to: {roc_path}")
+
+    # Generate LaTeX Table Code for Thesis
     print("\n" + "="*65)
-    print("           CROSS-VALIDATION EVALUATION RESULTS           ")
+    print("           LaTeX TABLE CODE FOR THESIS DISSERTATION           ")
     print("="*65)
-    print(f" Tabular AUROC:       {np.mean(cv_scores['tabular_auroc']):.4f} ± {np.std(cv_scores['tabular_auroc']):.4f}")
-    print(f" Temporal LSTM AUROC: {np.mean(cv_scores['temporal_auroc']):.4f} ± {np.std(cv_scores['temporal_auroc']):.4f}")
-    print(f" BioClinicalBERT:     {np.mean(cv_scores['text_auroc']):.4f} ± {np.std(cv_scores['text_auroc']):.4f}")
-    print(f" Multimodal Fusion:   {np.mean(cv_scores['fusion_auroc']):.4f} ± {np.std(cv_scores['fusion_auroc']):.4f}")
-    print(f" Multimodal AUPRC:    {np.mean(cv_scores['fusion_auprc']):.4f} ± {np.std(cv_scores['fusion_auprc']):.4f}")
-
-    # 4. Generate SHAP Plot
-    print("\n[4/4] Generating SHAP Explanation Plot...")
-    explainer = shap.TreeExplainer(rf_model)
-    shap_values = explainer(X_tab_val_s)
-    shap_vals_class1 = shap_values.values[:, :, 1] if len(shap_values.shape) == 3 else shap_values.values
-
-    fig = plt.figure(figsize=(8, 5))
-    shap.summary_plot(shap_vals_class1, features=X_tab_val, feature_names=X_tab_val.columns.tolist(), show=False)
-    save_path = os.path.join(Config.OUTPUT_FIGURES_DIR, "shap_summary.png")
-    plt.title("SHAP Feature Importance (Structured Vitals/Labs)", fontsize=12)
-    plt.tight_layout()
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    plt.close('all')
-    print(f"[OK] Updated SHAP plot saved to: {save_path}")
+    print("\\begin{table}[h]")
+    print("\\centering")
+    print("\\caption{Performance comparison of single modalities vs. Late Fusion baseline on Sepsis Prediction.}")
+    print("\\begin{tabular}{lcc}")
+    print("\\hline")
+    print("\\textbf{Model Branch} & \\textbf{AUROC (Mean \\pm SD)} & \\textbf{AUPRC (Mean \\pm SD)} \\\\")
+    print("\\hline")
+    for name in metrics:
+        auroc_m, auroc_s = np.mean(metrics[name]), np.std(metrics[name])
+        auprc_m, auprc_s = np.mean(auprc_metrics[name]), np.std(auprc_metrics[name])
+        print(f"{name:<20} & {auroc_m:.4f} \\pm {auroc_s:.4f} & {auprc_m:.4f} \\pm {auprc_s:.4f} \\\\")
+    print("\\hline")
+    print("\\end{tabular}")
+    print("\\end{table}")
 
 if __name__ == "__main__":
     main()

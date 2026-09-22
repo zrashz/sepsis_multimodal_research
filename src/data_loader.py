@@ -8,6 +8,36 @@ import numpy as np
 import pandas as pd
 from src.config import Config
 
+def load_real_mimic_data(data_dir=Config.DATA_RAW_DIR):
+    """
+    Ingests official SQL-extracted MIMIC-IV CSV files for Sepsis-3 cohort.
+    Expects CSVs: tabular_features.csv, vitals_timeseries.csv, clinical_notes.csv
+    """
+    tab_path = os.path.join(data_dir, "tabular_features.csv")
+    ts_path = os.path.join(data_dir, "vitals_timeseries.csv")
+    notes_path = os.path.join(data_dir, "clinical_notes.csv")
+
+    if not (os.path.exists(tab_path) and os.path.exists(ts_path) and os.path.exists(notes_path)):
+        print(f"[INFO] MIMIC-IV CSVs not found in '{data_dir}'. Falling back to synthetic generator...")
+        return generate_synthetic_data()
+
+    print(f"[OK] Loading real MIMIC-IV datasets from {data_dir}...")
+    tabular_df = pd.read_csv(tab_path)
+    labels = tabular_df['sepsis_label'].values
+    tabular_df = tabular_df.drop(columns=['subject_id', 'stay_id', 'sepsis_label'], errors='ignore')
+
+    # Load and reshape time-series (Patients x 24 Hours x 5 Vitals)
+    ts_df = pd.read_csv(ts_path)
+    num_patients = len(tabular_df)
+    time_series_data = ts_df.iloc[:, 1:].values.reshape(num_patients, Config.SEQ_LEN, 5)
+
+    # Load text notes
+    notes_df = pd.read_csv(notes_path)
+    text_corpus = notes_df['text_note'].tolist()
+
+    return tabular_df, time_series_data, text_corpus, labels
+
+
 def generate_synthetic_data(num_patients=500, seq_len=Config.SEQ_LEN):
     """
     Generates synthetic MIMIC-IV aligned multimodal datasets for testing.
@@ -61,5 +91,5 @@ def generate_synthetic_data(num_patients=500, seq_len=Config.SEQ_LEN):
     return tabular_df, time_series_data, text_corpus, labels
 
 if __name__ == "__main__":
-    tab, ts, txt, y = generate_synthetic_data()
-    print(f"[OK] Data Loader Ready: Generated {len(y)} patient records.")
+    tab, ts, txt, y = load_real_mimic_data()
+    print(f"[OK] Data Loader Ready: Ingested {len(y)} patient records.")
